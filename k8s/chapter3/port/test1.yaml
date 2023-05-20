@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ash-node-1
+  labels:
+    nodeselector: "1"
+spec:
+  nodeSelector:
+    NODE: "1"
+  containers:
+  - image: ojt90902/ash:latest
+    name: ash

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ash2
+  labels:
+    app: hello2
+spec:
+  containers:
+  - image: ojt90902/ash:latest
+    name: ash
+    ports:
+    - containerPort: 8080
+      protocol: TCP
