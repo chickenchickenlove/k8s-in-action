@@ -1,0 +1,21 @@
+# 큰일나는 이유는 다음과 같다.
+# Controller는 셀렉터에 대응되는 상태를 만족하지 못하는 경우 Template에 있는 파드를 생성함.
+# 생성된 파드는 Label이 다름. 따라서 Controller가 새롭게 파드를 생성했지만, 여전히 만족하는 파드를 생성하지 못해서 계속 생성함.
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: kubia
+spec:
+  replicas: 3
+#  selector: # select를 설정하지 않으면 묵시적으로 Template의 레이블을 바라봄.
+#    app: kubia # 이 실렉터가, Template을 정확하게 바라보지 않으면 큰일남.
+  template:
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+        - name: kubia
+          image: luksa/kubia
+          ports:
+            - containerPort: 8080
