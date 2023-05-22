@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: spring-boot
+spec:
+  containers:
+    - image: ojt90902/ash:latest
+      imagePullPolicy: Always
+      name: ash
+      ports:
+        - containerPort: 8080
+          protocol: TCP

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+  labels:
+    service: hello
+spec:
+   sessionAffinity: ClientIP # CLIENTIP / NONE만 존재
+   selector:
+     app: k8s-in-action
+   ports:
+     - port: 80
+       targetPort: 8080
