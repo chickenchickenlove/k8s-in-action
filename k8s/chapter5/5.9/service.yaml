@@ -1,0 +1,16 @@
+# 하나의 서비스는 다중 포트를 지원할 수 있음.
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service-no-endpoint
+  labels:
+    service: hello
+spec:
+   sessionAffinity: ClientIP
+   ports:
+     - port: 80
+       targetPort: 8080
+       name: http
+     - port: 443
+       targetPort: 8443
+       name: https

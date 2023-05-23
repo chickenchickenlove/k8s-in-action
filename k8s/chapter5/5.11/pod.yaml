@@ -1,0 +1,17 @@
+# 파드 포트에 이름 붙여주기
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod
+  labels:
+    app: from-node
+spec:
+  containers:
+    - name: from-node
+      image: ojt90902/ash:latest
+      ports:
+        - containerPort: 80
+          name: http-pod
+        - containerPort: 8443
+          name: https-pod
+

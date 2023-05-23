@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: k8s-in-action-5-1-1
-      image: ojt90902/ash:latest
+      image: ubuntu:20.04
       ports:
         - containerPort: 80
           name: http
