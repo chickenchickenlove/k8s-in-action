@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubia-nodeport
+  template:
+    metadata:
+      labels:
+        app: kubia-nodeport
+    spec:
+      containers:
+        - name: kubia-nodeport
+          image: luksa/kubia
+          imagePullPolicy: Always
+

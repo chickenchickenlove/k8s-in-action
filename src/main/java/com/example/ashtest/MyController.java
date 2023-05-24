@@ -22,19 +22,19 @@ public class MyController {
     }
 
 
-    private static int errorCount = 0;
+//    private static int errorCount = 0;
 
-    @GetMapping("/health-check")
-    public String hello(HttpServletResponse response) {
-        log.info("errorCount = {}", errorCount);
-        errorCount++;
-        if (errorCount % 5 == 0) {
-            response.setStatus(500);
-        } else {
-            response.setStatus(200);
-        }
-        return "error";
-    }
+//    @GetMapping("/health-check")
+//    public String hello(HttpServletResponse response) {
+//        log.info("errorCount = {}", errorCount);
+//        errorCount++;
+//        if (errorCount % 5 == 0) {
+//            response.setStatus(500);
+//        } else {
+//            response.setStatus(200);
+//        }
+//        return "error";
+//    }
 
 
 

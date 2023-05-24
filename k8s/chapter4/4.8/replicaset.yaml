@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: hello
+spec:
+  replicas: 1
+  selector:
+    matchExpressions:
+      - key: app
+        operator: Exists
+
+  template:
+    metadata:
+      name: kubia-hello
+      labels:
+        app: kubia
+    spec:
+      containers:
+        - name: hello
+          image: luksa/kubia
+          ports:
+            - containerPort: 80
+
+
+
+

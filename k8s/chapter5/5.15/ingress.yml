@@ -1,0 +1,28 @@
+# 인그레스 설치
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubia-5-15
+spec:
+  ingressClassName: nginx # 이게 없으면 배포가 안되나?
+  rules:
+    - host: foo.example.com
+      http:
+        paths:
+        - path: /hello-foo
+          pathType: Prefix
+          backend:
+            service:
+              name: kubia-nodeport
+              port:
+                number: 80
+    - host: bar.example.com
+      http:
+        paths:
+        - path: /hello-bar
+          pathType: Prefix
+          backend:
+            service:
+              name: kubia-nodeport
+              port:
+                number: 80

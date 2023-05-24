@@ -1,0 +1,25 @@
+# Readness Probe 확인
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia-readness
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: kubia-readness
+  template:
+    metadata:
+      labels:
+        app: kubia-readness
+    spec:
+      containers:
+        - name: kubia-dep
+          image: luksa/kubia
+          imagePullPolicy: Always
+          readinessProbe:
+            exec:
+              command:
+                - ls
+                - /var/ready
+
