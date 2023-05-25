@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: chapter-4-10-daemonset
+spec:
+  selector:
+    matchLabels:
+      app: daemon
+  template:
+    metadata:
+      name: chapter-4-10-daemonset
+      labels:
+        app: daemon
+    spec:
+      nodeSelector:
+        disk: ssd
+      containers:
+        - name: chapter-4-10-daemonset
+          image: luksa/kubia
+          ports:
+            - containerPort: 8080
