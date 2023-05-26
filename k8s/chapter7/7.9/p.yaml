@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c7-9
+spec:
+  containers:
+    - name: c7-9
+      image: ojt90902/fortune:env
+      imagePullPolicy: Always
+      env:
+        - name: INTERVAL
+          valueFrom:
+            configMapKeyRef:
+              name: fortune-config
+              key: sleep-interval
+      envFrom:
+        - prefix: KUBE_CONFIG_
+          configMapRef:
+            name: fortune-config
+

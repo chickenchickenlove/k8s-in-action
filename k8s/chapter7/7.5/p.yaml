@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c7-5
+spec:
+  containers:
+    - name: c7-5
+      image: ojt90902/fortune:env
+      imagePullPolicy: Always
+      env:
+        - name: INTERVAL
+          value: "50"
+        - name: HELLO
+          value: "$(INTERVAL)-HELLO"

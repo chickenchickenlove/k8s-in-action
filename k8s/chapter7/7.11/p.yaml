@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c7-11
+spec:
+  containers:
+    - name: c7-11
+      image: ojt90902/fortune:args
+      imagePullPolicy: Always
+      env:
+        - name: INTERVAL
+          valueFrom:
+            configMapKeyRef:
+              name: fortune-config
+              key: sleep-interval
+      args:
+        - "$(INTERVAL)"
