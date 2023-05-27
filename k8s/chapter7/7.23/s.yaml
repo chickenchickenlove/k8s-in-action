@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: string-data-secret
+stringData:
+  hello: no-encoded
+

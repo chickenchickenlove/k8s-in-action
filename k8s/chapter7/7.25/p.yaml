@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c7-11
+spec:
+  containers:
+    - name: c7-11
+      image: ojt90902/fortune:args
+  # 자격증명이 필요한 허브에서 가져오는 경우, docker-registry 타입의 secret을 사용해야 함.
+  imagePullSecrets:
+    - name: hello-hub-secret
