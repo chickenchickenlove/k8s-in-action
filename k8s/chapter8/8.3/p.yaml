@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c8-3
+  labels:
+    foo: bar
+  annotations:
+    key1: value1
+    key2: |
+      multi
+      line
+      value
+spec:
+  containers:
+    - name: c8-3
+      image: ojt90902/all:latest
+      imagePullPolicy: Always
+      command: ["sleep", "999d"]
+      volumeMounts:
+        - mountPath: /etc/downward
+          name: downward
+  volumes:
+    - name: downward
+      downwardAPI:
+        items:
+          - path: "podName"
+            fieldRef:
+              fieldPath: metadata.name
+          - path: "podNamespace"
+            fieldRef:
+              fieldPath: metadata.namespace
+          - path: "labels"
+            fieldRef:
+              fieldPath: metadata.labels
+          - path: "annotations"
+            fieldRef:
+              fieldPath: metadata.annotations
+          - path: "containerCpuRequest"
+            resourceFieldRef:
+              containerName: c8-3
+              resource: requests.cpu
+              divisor: 1m
+          - path: "containerMemoryRequest"
+            resourceFieldRef:
+              containerName: c8-3
+              resource: requests.memory
+              divisor: 1Ki

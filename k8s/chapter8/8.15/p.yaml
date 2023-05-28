@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c8-15
+spec:
+  containers:
+    - name: c8-15
+      image: ojt90902/all:latest
+      command: ["sleep", "999d"]
+    - name: ambassador
+      image: luksa/kubectl-proxy:1.6.2
