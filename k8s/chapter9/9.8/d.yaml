@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c9-8-deploy
+spec:
+  replicas: 3
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: c9-8-deploy-kubia
+  template:
+    metadata:
+      name: c9-8-deploy-kubia
+      labels:
+        app: c9-8-deploy-kubia
+    spec:
+      containers:
+        - name: c9-7-deploy
+          image: luksa/kubia:v1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: c9-8-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: c9-8-deploy-kubia
+  ports:
+    - port: 80
+      targetPort: 8080

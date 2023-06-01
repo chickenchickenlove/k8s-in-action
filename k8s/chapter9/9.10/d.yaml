@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c9-10-deploy
+spec:
+  replicas: 10
+  minReadySeconds: 10
+  progressDeadlineSeconds:
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+  selector:
+    matchLabels:
+      app: c9-10-deploy-kubia
+  template:
+    metadata:
+      name: c9-10-deploy-kubia
+      labels:
+        app: c9-10-deploy-kubia
+    spec:
+      containers:
+        - name: c9-10-deploy
+          image: luksa/kubia:v1
