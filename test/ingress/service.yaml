@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+  namespace: ingress-nginx
+  labels:
+    service: hello
+spec:
+  selector:
+    app: k8s-in-action
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia
+  namespace: ingress-nginx
+  labels:
+    app: k8s-in-action
+spec:
+  containers:
+    - name: kubia
+      image: ojt90902/ash:pi
+      ports:
+        - containerPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubia
+  namespace: ingress-nginx
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /hello
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-service
+                port:
+                  number: 80
