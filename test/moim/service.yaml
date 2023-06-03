@@ -1,12 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-service
-  labels:
-    service: hello
+  name: moim-service
 spec:
   selector:
-    app: k8s-in-action
+    app: moim
   ports:
     - port: 80
       targetPort: 8080
@@ -14,13 +12,13 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: kubia
+  name: moim-dev
   labels:
-    app: k8s-in-action
+    app: moim
 spec:
   containers:
-    - name: kubia
-      image: ojt90902/ash:pi
+    - name: moim
+      image: ojt90902/moim:pi
       ports:
         - containerPort: 8080
 ---
@@ -28,17 +26,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-  name: kubia
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: moim
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /hello
+          - path: /moim(/|$)(.*)
             pathType: Prefix
             backend:
               service:
-                name: hello-service
+                name: moim-service
                 port:
                   number: 80
