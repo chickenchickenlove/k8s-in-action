@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moiming-db
+  labels:
+    app: mysql-moiming
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-moiming
+  template:
+    metadata:
+      labels:
+        app: mysql-moiming
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0.33
+          args:
+            - --character-set-server=utf8mb4
+            - --collation-server=utf8mb4_unicode_ci
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: peoplein
+            - name: MYSQL_DATABASE
+              value: moiming
+          ports:
+            - containerPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-moiming
+spec:
+  selector:
+    app: mysql-moiming
+  ports:
+    - port: 3306
+      targetPort: 3306
+      name: mysql

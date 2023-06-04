@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: moim-service
+spec:
+  selector:
+    app: moim
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moim-dev
+  labels:
+    app: moim
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moim
+  template:
+    metadata:
+      labels:
+        app: moim
+    spec:
+      containers:
+        - name: moim
+          image: ojt90902/moim:pi10
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: moim-cm
+              mountPath: config
+              readOnly: true
+          args:
+            - -Dspring.config.location=/config/application.yaml
+      volumes:
+        - name: moim-cm
+          configMap:
+            name: moim-dev
+            items:
+              - key: application.yaml
+                path: application.yaml
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: moim
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /moim(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: moim-service
+                port:
+                  number: 80
+---
+apiVersion: v1
+data:
+  application.yaml: |
+    spring:
+      datasource:
+        url: jdbc:mysql://mysql-moiming:3306/moiming?useSSL=false&characterEncoding=utf8&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+        username: root
+        password: peoplein
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      jpa:
+        hibernate:
+          ddl-auto: 
+        properties:
+          hibernate:
+            database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+            show_sql: true
+            format_sql: true
+            default_batch_fetch_size: 100
+        defer-datasource-initialization: true
+        generate-ddl: true
+        open-in-view: false
+kind: ConfigMap
+metadata:
+  name: moim-dev
