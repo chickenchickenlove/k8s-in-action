@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c14-3-pod
+spec:
+  containers:
+    - image: busybox
+      command: ["dd", "if=/dev/zero", "of=/dev/null"]
+      name: main
+      resources:
+        requests:
+          cpu: "4"
+          memory: 10Mi # 10Mi 메모리 요청

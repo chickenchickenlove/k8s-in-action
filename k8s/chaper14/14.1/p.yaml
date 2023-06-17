@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c14-1-pod
+spec:
+  containers:
+    - image: busybox
+      command: ["dd", "if=/dev/zero", "of=/dev/null"]
+      name: main
+      resources:
+        requests:
+          cpu: 200m # 200 밀리 코어 요청( 1코어 = 1000m)
+          memory: 10Mi # 10Mi 메모리 요청
