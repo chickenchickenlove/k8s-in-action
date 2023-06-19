@@ -10,4 +10,4 @@ spec:
       resources:
         requests:
           cpu: "4"
-          memory: 10Mi # 10Mi 메모리 요청
+          memory: 10Mi # 10Mi 메모리 요청을 함.
