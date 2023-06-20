@@ -1,0 +1,14 @@
+# 리소스 요청(Request)를 지정하지 않았음. 따라서 Request는 Limit과 동일하게 지정됨.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c14-7-pod
+spec:
+  containers:
+    - name: main
+      image: busybox
+      command: ["dd", "if=/dev/zero", "of=/dev/null"]
+      resources:
+        limits:
+          cpu: "1" # CPU 최대 사용 제한
+          memory: 20Mi # 메모리 최대 사용 제한

@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-job
+spec:
+  # 이 시간까지 완료되지 않으면 실패한 Job임.
+  activeDeadlineSeconds: 1
+  completions: 5
+  template:
+    metadata: # Pod Selector를 지정하지 않으면, 자동으로 Template의 라벨을 선택함.
+      labels:
+        app: batch-job
+    spec:
+      restartPolicy: OnFailure # Job은 Always 불가능.
+      containers:
+        - name: main
+          image: luksa/batch-job

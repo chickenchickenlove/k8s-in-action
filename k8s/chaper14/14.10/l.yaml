@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: c-14-10-limit-range
+spec:
+  limits:
+    - type: Pod
+      min:
+        cpu: 50m
+        memory: 50Mi
+      max:
+        cpu: "1"
+        memory: 1Gi
+    - type: Container
+      # Request를 지정하지 않은 경우, 기본 Request
+      defaultRequest:
+        cpu: 100m
+        memory: 10Mi
+      # Limit를 지원하지 않은 경우, 기본 Limit
+      default:
+        cpu: 200m
+        memory: 100Mi
+      min:
+        cpu: 50m
+        memory: 5Mi
+      max:
+        cpu: "1"
+        memory: 1Gi
+      # 각 리소스의 (Reqeust / Limit)의 최대 비율
+      maxLimitRequestRatio:
+        cpu: "4"
+        memory: "10"
+    - type: PersistentVolume
+      min:
+        storage: 1Gi
+      max:
+        storage: 10Gi
+

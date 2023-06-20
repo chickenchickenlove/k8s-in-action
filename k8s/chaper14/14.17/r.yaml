@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: c14-17
+spec:
+  scopes:
+    - BestEffort
+    - NotTerminating
+  hard:
+    pods: "10"
