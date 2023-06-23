@@ -1,0 +1,22 @@
+#EmptryDIr
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c6-1
+spec:
+  containers:
+    - name: html-generator
+      image: luksa/fortune
+      volumeMounts:
+        - mountPath: /var/htdocs
+          name: html
+    - name: web-server
+      image: nginx:alpine
+      volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: html
+          readOnly: true
+  volumes:
+    - name: html
+      # emptyDir
+      emptyDir: {}
