@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: c6-15A
+  name: c6-15AA
 spec:
   storageClassName: fast
   resources:
