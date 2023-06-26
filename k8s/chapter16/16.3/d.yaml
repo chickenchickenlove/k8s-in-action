@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name : c16-3
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: c16-3
+  template:
+    metadata:
+      labels:
+        app: c16-3
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          command: ["sleep", "99999"]
+      tolerations:
+        - key: k1
+          value: v1
+          effect: NoSchedule
+          operator: Equal
