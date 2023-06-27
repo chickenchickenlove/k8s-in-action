@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c16-8
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: c16-8
+  template:
+    metadata:
+      labels:
+        app: c16-8
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: hello
+                    operator: In
+                    values:
+                      - hello
+      containers:
+        - name: c16-8
+          image: busybox
+          command: ["sleep", "99999"]

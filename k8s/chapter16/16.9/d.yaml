@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c16-9
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: c16-9
+  template:
+    metadata:
+      labels:
+        app: c16-9
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: availability-zone
+                    operator: In
+                    values:
+                      - zone1
+              weight: 80
+            - preference:
+                matchExpressions:
+                  - key: share-type
+                    operator: In
+                    values:
+                      - dedicated
+              weight: 20
+      containers:
+        - name: c16-9
+          image: busybox
+          command: ["sleep", "99999"]
