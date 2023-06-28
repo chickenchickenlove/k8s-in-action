@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name : c16-3
+  name : c16-31
 spec:
   replicas: 5
   selector:
