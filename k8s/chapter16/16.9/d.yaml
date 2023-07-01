@@ -14,21 +14,6 @@ spec:
     spec:
       affinity:
         nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - preference:
-                matchExpressions:
-                  - key: availability-zone
-                    operator: In
-                    values:
-                      - zone1
-              weight: 80
-            - preference:
-                matchExpressions:
-                  - key: share-type
-                    operator: In
-                    values:
-                      - dedicated
-              weight: 20
       containers:
         - name: c16-9
           image: busybox
