@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c16-13-front
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      name: c16-13-front
+      labels:
+        app: front
+    spec:
+      containers:
+        - name: front
+          image: busybox
+          command: ["sleep", "99999"]
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: sha-test
+              labelSelector:
+                matchLabels:
+                  app: back-13

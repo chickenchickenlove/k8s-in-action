@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c16-18
+spec:
+  replicas: 5
+  template:
+    metadata:
+      name: c16-18
+      labels:
+        app: c16-18-frontend
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  app: c16-18-frontend
+      containers:
+        - name: c16-18-frontend
+          image: busybox
+          command: ["sleep", "99999"]
