@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: c16-18
+  name: c16-18a
 spec:
   replicas: 5
   template:
