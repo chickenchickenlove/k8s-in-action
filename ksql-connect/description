@@ -1,0 +1,6 @@
+// HTTP POST로 Connector를 만들어도, 이게 ksql에서 조회가 가능함.
+ksql > show connectors;
+ Connector Name      | Type   | Class                                                                      | Status
+--------------------------------------------------------------------------------------------------------------------
+ csv_spooldir_source | SOURCE | com.github.jcustenborder.kafka.connect.spooldir.SpoolDirCsvSourceConnector | FAILED
+--------------------------------------------------------------------------------------------------------------------
