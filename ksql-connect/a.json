@@ -7,7 +7,7 @@
     "input.file.pattern": "^.*\\.csv",
     "error.path": "/home/appuser/error/",
     "finished.path": "/home/appuser/finished/",
-    "empty.poll.wait.ms": 30000,
+    "empty.poll.wait.ms": 300001,
     "halt.on.error": "false",
     "topic": "spooldir-test-topic",
     "csv.first.row.as.header": "true",
