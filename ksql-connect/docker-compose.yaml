@@ -32,7 +32,7 @@ services:
   ksqldb-server:
     image: confluentinc/ksqldb-server:0.28.2
     hostname: ksqldb-server
-    container_name: ksqldb-server
+    container_name: ksqldb-server1
     depends_on:
       - broker
     ports:
