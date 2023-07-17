@@ -4,7 +4,7 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.0
     hostname: zookeeper
-    container_name: zookeeper
+    container_name: zookeepera
     ports:
       - "21811:2181"
     environment:
