@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: chapter-4-10-daemonset
+  name: chapter-4-10-daemonseta
 spec:
   selector:
     matchLabels:
